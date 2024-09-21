@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="tictactoe.css">
+    <title>TicTacToe</title>
+  </head>
+  <body>
+      <div class="title">Welcome to Tic Tac Toe Game</div>
+    <div class="container">
+      <div class="game-board">
+        <div class="game-pad" id="1" data-key="0-0" onclick="AddElement(1)"></div>
+        <div class="game-pad" id="2" data-key="0-1" onclick="AddElement(2)"></div>
+        <div class="game-pad" id="3" data-key="0-2" onclick="AddElement(3)"></div>
+        <div class="game-pad" id="4" data-key="1-0" onclick="AddElement(4)"></div>
+        <div class="game-pad" id="5" data-key="1-1" onclick="AddElement(5)"></div>
+        <div class="game-pad" id="6" data-key="1-2" onclick="AddElement(6)"></div>
+        <div class="game-pad" id="7" data-key="2-0" onclick="AddElement(7)"></div>
+        <div class="game-pad" id="8" data-key="2-1" onclick="AddElement(8)"></div>
+        <div class="game-pad" id="9" data-key="2-2" onclick="AddElement(9)"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let counter = 1;
+    let arr = [[null,null,null],[null,null,null],[null,null,null]];
+    let xWins = 0;
+    let oWins = 0;
+    function AddElement(e)
+    {
+      const allboxes = document.querySelectorAll("div[class='game-pad']");
+      console.log(allboxes);
+      const box = document.querySelector(`div[id="${e}"]`);
+      const position = box.getAttribute('data-key');
+      const row = parseInt(position[0]);
+      const col = parseInt(position[2]);
+      if(box.innerText === "")
+      {
+        if(counter % 2 === 0)
+        {
+          box.innerText = "O";
+          arr[row][col] = "O";
+          if(CheckIfWon(row,col,"O") === 1)
+          {
+            setTimeout(() => 
+            {  
+            alert(`O WON !!!`);
+            allboxes.forEach(box => box.innerText = ""); 
+            arr = [[null, null, null], [null, null, null], [null, null, null]]; 
+            counter = 1;
+            }, 50);
+            oWins++
+            return; 
+          }
+        }
+        else
+        {
+          box.innerText = "X";
+          arr[row][col] = "X";
+          if(CheckIfWon(row,col,"X") === 1)
+          {
+            setTimeout(() => 
+            {  
+            alert(`X WON !!!`);
+            allboxes.forEach(box => box.innerText = ""); 
+            arr = [[null, null, null], [null, null, null], [null, null, null]]; 
+            counter = 1;
+            }, 50);
+            xWins++; 
+            return;
+          }
+        }
+        counter++;
+      }
+    }
+    function Check(e,val)
+    {
+      return e === val;
+    }
+    function CheckIfWon(row, col, value)
+    {
+      let vertical = [];
+      let horizontal = [];
+      let right = [];
+      let left = [];
+      for(let i = 0; i < 3; i++)
+      {
+        vertical.push(arr[i][col]); 
+        horizontal.push(arr[row][i]);
+        right.push(arr[i][i]);
+        left.push(arr[2-i][i]);
+      }
+      if(vertical.every((e) => Check(e, value))) 
+      {
+        return 1;
+      }
+      if(horizontal.every((e) => Check(e, value))) 
+      {
+        return 1;
+      }
+      if(right.every((e) => Check(e, value))) 
+      {
+        return 1;
+      }
+      if(left.every((e) => Check(e, value))) 
+      {
+        return 1;
+      }
+    }
+
+  </script>
+</html>

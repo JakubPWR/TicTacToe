@@ -1,0 +1,41 @@
+html
+{
+  padding: 0;
+  background-color: rgba(20, 20, 20, 0.356);
+}
+.title
+{
+  padding-top: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100px;
+  color: navy;
+  box-shadow: 20px 20px 20px gray;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.game-board
+{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3,1fr);
+  width: 500px; 
+  height: 500px;
+}
+.game-board div {
+  background-color: lightblue; /* Style the individual squares */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: navy;
+  border: 1;
+  border-width: 3px;
+  border-color: navy;
+  border-style: solid;
+  margin: 1px;
+}
